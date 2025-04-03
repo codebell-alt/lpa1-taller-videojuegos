@@ -6,8 +6,11 @@
 - ver [badgen](https://badgen.net/) o [shields](https://shields.io/) para otros tipos de _badges_
 
 ## Autor
+Juan Alejandro Ramirez  
+- [@juanrs69](https://github.com/juanrs69)  
 
-- [@estudiante](https://www.github.com/estudiante)
+Isabella Ramirez  
+- [@codebell-alt](https://github.com/codebell-alt)  
 
 ## Descripción del Proyecto
 
