@@ -28,3 +28,5 @@ while True:
 
     client_socket.close()
     print("[Conexión cerrada]")
+
+
