@@ -6,20 +6,20 @@ class Enemigo:
         self.velX = 2
         self.haciaDerecha = False
         self.vidas = 3
-        self.vivo = True  # NUEVO: indica si el enemigo sigue activo
+        self.vivo = True  # 👈 NUEVO: indica si el enemigo sigue activo
 
     def cargarImagen(self, imagen):
         self.imagen = imagen
 
     def mover(self):
-        if self.vivo:  # Solo se mueve si está vivo
+        if self.vivo:  # 👈 Solo se mueve si está vivo
             self.x += self.velX
             if self.x <= 100 or self.x >= width - self.imagen.width:
                 self.velX *= -1
                 self.haciaDerecha = self.velX > 0
 
     def mostrar(self):
-        if self.vivo:  # Solo se muestra si está vivo
+        if self.vivo:  # 👈 Solo se muestra si está vivo
             pushMatrix()
             if not self.haciaDerecha:
                 translate(self.x + self.imagen.width, self.y)
@@ -36,4 +36,4 @@ class Enemigo:
                 self.vidas -= 1
                 personaje.atacando = False  # para evitar ataques múltiples seguidos
                 if self.vidas <= 0:
-                    self.vivo = False  # Enemigo "muere"
+                    self.vivo = False  # 👈 Enemigo "muere"
