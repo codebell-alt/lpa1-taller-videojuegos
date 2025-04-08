@@ -1,4 +1,4 @@
-# personaje
+# -*- coding: utf-8 -*-
 class Personaje:
     def __init__(self, startX, startY):
         self.x = startX
@@ -8,6 +8,9 @@ class Personaje:
         self.atacando = False
         self.velocidad = 3
         self.ALTURA_SUELO = 450
+        self.haciaDerecha = True
+        self.tiempoAtaque = 0
+        self.duracionAtaque = 500
 
     def cargarImagenes(self):
         self.imgQuieto = loadImage("muneco_quieto.png")
@@ -25,17 +28,30 @@ class Personaje:
                 self.enElAire = False
                 if not self.atacando:
                     self.imagenActual = self.imgQuieto
-
         if self.velX != 0 and not self.enElAire and not self.atacando:
             self.imagenActual = self.imgCaminando
-
         self.x = constrain(self.x, 100, width - self.imagenActual.width)
 
+        # Terminar animación de ataque
+        if self.atacando and millis() - self.tiempoAtaque > self.duracionAtaque:
+            self.atacando = False
+            if not self.enElAire:
+                self.imagenActual = self.imgCaminando if self.velX != 0 else self.imgQuieto
+
     def mostrar(self):
-        image(self.imagenActual, self.x, self.y)
+        pushMatrix()
+        if not self.haciaDerecha:
+            translate(self.x + self.imagenActual.width, self.y)
+            scale(-1, 1)
+            image(self.imagenActual, 0, 0)
+        else:
+            image(self.imagenActual, self.x, self.y)
+        popMatrix()
 
     def actualizarMovimiento(self, dirX):
         self.velX = dirX * self.velocidad
+        if dirX != 0:
+            self.haciaDerecha = dirX > 0
         if not self.enElAire and not self.atacando:
             self.imagenActual = self.imgCaminando
 
@@ -48,13 +64,8 @@ class Personaje:
     def atacar(self):
         if not self.atacando:
             self.atacando = True
+            self.tiempoAtaque = millis()
             self.imagenActual = self.imgAtacando
-            threading.Thread(target=self.resetAtaque).start()
-
-    def resetAtaque(self):
-        delay(500)
-        self.atacando = False
-        self.imagenActual = self.imgQuieto
 
     def detenerMovimiento(self):
         self.velX = 0
