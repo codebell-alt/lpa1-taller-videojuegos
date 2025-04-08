@@ -11,6 +11,7 @@ class Personaje:
         self.haciaDerecha = True
         self.tiempoAtaque = 0
         self.duracionAtaque = 500
+        self.vidas = 4  # 🔸 También tiene 4 vidas como el enemigo
 
     def cargarImagenes(self):
         self.imgQuieto = loadImage("muneco_quieto.png")
